@@ -100,7 +100,7 @@ public class SignUp extends AppCompatActivity {
         getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putBoolean("isLoggedIn", false).apply();
         Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(SignUp.this, LoginPage.class));
-
+        finish();
 
     }
 }
