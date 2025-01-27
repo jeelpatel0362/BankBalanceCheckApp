@@ -1,19 +1,34 @@
 package com.example.bankbalancecheckapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SignUp extends AppCompatActivity {
 
+    private static final int PICK_IMAGE_REQUEST = 100;
+    private CircleImageView profile_image;
     private EditText etUserName, etAccountNumber, etMobileNumber, etPassword, etConfirmPassword;
 
     @Override
@@ -27,6 +42,7 @@ public class SignUp extends AppCompatActivity {
         etMobileNumber = findViewById(R.id.mobileNumber_content);
         etPassword = findViewById(R.id.password_content);
         etConfirmPassword = findViewById(R.id.confirmPassword_content);
+        profile_image = findViewById(R.id.user_profile);
 
         findViewById(R.id.signUpBtn).setOnClickListener(v -> signUpUser());
 
@@ -38,7 +54,7 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private void signUpUser() {
+    private void signUpUser(){
 
         String userName = etUserName.getText().toString().trim();
         String accountNumber = etAccountNumber.getText().toString().trim();
@@ -97,10 +113,44 @@ public class SignUp extends AppCompatActivity {
             etConfirmPassword.requestFocus();
             return;
         }
-        getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putBoolean("isLoggedIn", false).apply();
+
+        File tempFile;
+        try {
+            tempFile = saveImageToCache();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putString("profile_image", tempFile.getAbsolutePath()).putBoolean("isLoggedIn", false).apply();
         Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(SignUp.this, LoginPage.class));
         finish();
 
     }
+
+    public void pickImage(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 100);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            profile_image.setImageURI(uri);
+        }
+    }
+
+    private File saveImageToCache() throws IOException {
+        Bitmap bitmap = ((BitmapDrawable) profile_image.getDrawable()).getBitmap();
+        File tempFile = new File(getCacheDir(), "profile_picture.jpg");
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        }
+        return tempFile;
+    }
 }
+
