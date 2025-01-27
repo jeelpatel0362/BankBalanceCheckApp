@@ -10,6 +10,16 @@
     android:background="@color/bgcolor"
     tools:context=".AccountDetails">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account details"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_profile"
         android:layout_width="130dp"
@@ -41,8 +51,17 @@
         android:text=""
         android:textColor="@color/white"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/mobileNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/balanceText"
@@ -58,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="20dp"
         android:text="Logout"
         android:textColor="@color/white"
         android:background="@drawable/custombtn"

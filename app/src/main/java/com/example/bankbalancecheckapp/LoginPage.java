@@ -43,6 +43,7 @@ public class LoginPage extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("BankAppPrefs", MODE_PRIVATE);
         String storedAccountNumber = prefs.getString("accountNumber", null);
         String storedPassword = prefs.getString("password", null);
+        String storedMobileNumber = prefs.getString("mobileNumber", null);
 
         if (TextUtils.isEmpty(accountNumber) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please fill all details", Toast.LENGTH_SHORT).show();
@@ -62,7 +63,7 @@ public class LoginPage extends AppCompatActivity {
             prefs.edit().putBoolean("isLoggedIn", true).apply();
 
             String name = prefs.getString("userName", "user");
-            UserData userData = new UserData(name, storedAccountNumber, 10000.0);
+            UserData userData = new UserData(name, storedAccountNumber, 10000.0,storedMobileNumber);
             Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, HomeScreen.class);
             intent.putExtra("user", userData);

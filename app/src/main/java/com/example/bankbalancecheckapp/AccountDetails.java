@@ -32,12 +32,14 @@ public class AccountDetails extends AppCompatActivity {
         TextView nameText = findViewById(R.id.nameText);
         TextView accountNumberText = findViewById(R.id.accountNumber);
         TextView balanceText = findViewById(R.id.balanceText);
+        TextView mobileNumber = findViewById(R.id.mobileNumber);
 
 
         if (userData != null) {
             nameText.setText("Name: " + userData.getName());
             accountNumberText.setText("Account Number: " + userData.getAccountNumber());
             balanceText.setText("Account Balance: " + userData.getBalance());
+            mobileNumber.setText("Mobile Number: " + userData.getMobileNumber());
         }
     }
         public void logoutUser (View view){

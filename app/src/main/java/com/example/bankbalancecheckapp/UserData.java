@@ -9,13 +9,14 @@ public class UserData implements Serializable {
     private double balance;
     private ArrayList<String> transactions;
 
+    private String mobileNumber;
 
-
-    public UserData(String name, String accountNumber, double balance) {
+    public UserData(String name, String accountNumber, double balance, String mobileNumber) {
         this.name = name;
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.transactions = new ArrayList<>();
+        this.mobileNumber = mobileNumber;
     }
 
 
@@ -23,6 +24,10 @@ public class UserData implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
     public String getAccountNumber() {
