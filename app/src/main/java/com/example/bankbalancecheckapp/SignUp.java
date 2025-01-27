@@ -121,7 +121,7 @@ public class SignUp extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putString("profile_image", tempFile.getAbsolutePath()).putBoolean("isLoggedIn", false).apply();
+        getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("profile_image", tempFile.getAbsolutePath()).putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putBoolean("isLoggedIn", false).apply();
         Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(SignUp.this, LoginPage.class));
         finish();
@@ -145,6 +145,9 @@ public class SignUp extends AppCompatActivity {
     }
 
     private File saveImageToCache() throws IOException {
+        if (profile_image.getDrawable() == null) {
+            throw new IOException("No image selected");
+        }
         Bitmap bitmap = ((BitmapDrawable) profile_image.getDrawable()).getBitmap();
         File tempFile = new File(getCacheDir(), "profile_picture.jpg");
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
@@ -153,4 +156,3 @@ public class SignUp extends AppCompatActivity {
         return tempFile;
     }
 }
-
