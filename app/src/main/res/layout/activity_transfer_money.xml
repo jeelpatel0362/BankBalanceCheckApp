@@ -1,49 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgcolor"
     android:orientation="vertical"
     android:padding="22dp"
-    android:background="@color/bgcolor"
     tools:context=".TransferMoney">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Transfer Money"
-        android:textSize="24sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="40dp"
+        android:text="Transfer Money"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etRecipient"
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/accountNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Account number"
-        android:inputType="number"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"/>
+        android:hint="Enter Account number "
+        android:padding="5dp"
+        app:boxBackgroundColor="@color/darkGray"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/skyBlue"
+        app:hintTextColor="@color/white"
+        app:shapeAppearanceOverlay="@style/RoundedTextInput">
 
-    <EditText
-        android:id="@+id/etAmount"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/accountNumber_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Enter Amount "
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        app:boxBackgroundColor="@color/darkGray"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/skyBlue"
+        app:hintTextColor="@color/white"
+        app:shapeAppearanceOverlay="@style/RoundedTextInput">
 
-        android:inputType="number"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amount_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnSendMoney"
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sendMoneyBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:textColor="@color/white"/>
-
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/custombtn"
+        android:text="Send Money"
+        android:textColor="@color/white" />
+    </LinearLayout>
 </LinearLayout>
+
