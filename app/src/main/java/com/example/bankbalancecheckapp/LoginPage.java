@@ -23,8 +23,8 @@ public class LoginPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page);
 
-        etAccountNumber = findViewById(R.id.accountNumber);
-        etPassword = findViewById(R.id.password);
+        etAccountNumber = findViewById(R.id.accountNumber_content);
+        etPassword = findViewById(R.id.password_content);
 
         findViewById(R.id.loginUpBtn).setOnClickListener(v -> loginUser());
 

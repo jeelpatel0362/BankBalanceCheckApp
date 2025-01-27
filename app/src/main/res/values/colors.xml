@@ -4,5 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mirage">#75FEFF</color>
     <color name="textcolor">#7524FE</color>
+    <color name="bgcolor">#162130</color>
+    <color name="lightGray">#D3D3D3</color>
+    <color name="lightBlue">#87CEFA</color>
+    <color name="skyBlue">#87CEEB</color>
+    <color name="darkGray">#A9A9A9</color>
 
 </resources>

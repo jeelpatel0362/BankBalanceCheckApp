@@ -22,11 +22,11 @@ public class SignUp extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up);
 
-        etUserName = findViewById(R.id.userName);
-        etAccountNumber = findViewById(R.id.accountNumber);
-        etMobileNumber = findViewById(R.id.mobileNumber);
-        etPassword = findViewById(R.id.password);
-        etConfirmPassword = findViewById(R.id.confirmPassword);
+        etUserName = findViewById(R.id.userName_content);
+        etAccountNumber = findViewById(R.id.accountNumber_content);
+        etMobileNumber = findViewById(R.id.mobileNumber_content);
+        etPassword = findViewById(R.id.password_content);
+        etConfirmPassword = findViewById(R.id.confirmPassword_content);
 
         findViewById(R.id.signUpBtn).setOnClickListener(v -> signUpUser());
 
