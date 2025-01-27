@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class TransferMoney extends AppCompatActivity {
-    private EditText recipient , amount ;
+    private EditText etRecipient , etAmount ;
     private UserData userData;
 
     @Override
@@ -24,8 +24,8 @@ public class TransferMoney extends AppCompatActivity {
 
         userData = (UserData) getIntent().getSerializableExtra("user");
 
-        recipient = findViewById(R.id.accountNumber_content);
-        amount = findViewById(R.id.amount_content);
+        etRecipient = findViewById(R.id.accountNumber_content);
+        etAmount = findViewById(R.id.amount_content);
 
         findViewById(R.id.sendMoneyBtn).setOnClickListener(this::sendMoney);
     }
@@ -33,8 +33,8 @@ public class TransferMoney extends AppCompatActivity {
     private  void sendMoney(View view){
 
 
-        String recipientText = recipient.getText().toString().trim();
-        String amountText = amount.getText().toString().trim();
+        String recipientText = etRecipient.getText().toString().trim();
+        String amountText = etAmount.getText().toString().trim();
 
         if(amountText.isEmpty() && recipientText.isEmpty()){
             Toast.makeText(this,"Please fill all details",Toast.LENGTH_SHORT).show();
@@ -53,7 +53,7 @@ public class TransferMoney extends AppCompatActivity {
 
         if(amountText.isEmpty()){
             Toast.makeText(this,"Amount field is Empty",Toast.LENGTH_SHORT).show();
-            amount.setError("Amount is Empty");
+            etAmount.setError("Amount is Empty");
             return ;
         }
 
@@ -66,7 +66,7 @@ public class TransferMoney extends AppCompatActivity {
         }
 
         userData.setBalance(userData.getBalance()-amount);
-        userData.addTransaction("₹" + amount +  " sent to " + recipientText );
+        userData.addTransaction("₹" + amountText +  " sent to " + recipientText );
 
         Toast.makeText(this,"Transaction successfull",Toast.LENGTH_SHORT).show();
 
