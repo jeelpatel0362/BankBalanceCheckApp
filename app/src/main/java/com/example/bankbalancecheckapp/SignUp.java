@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SignUp extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 100;
-    private CircleImageView profile_image;
+    private CircleImageView user_profile;
     private EditText etUserName, etAccountNumber, etMobileNumber, etPassword, etConfirmPassword;
 
     @Override
@@ -36,13 +36,13 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up);
+        user_profile = findViewById(R.id.user_profile);
 
         etUserName = findViewById(R.id.userName_content);
         etAccountNumber = findViewById(R.id.accountNumber_content);
         etMobileNumber = findViewById(R.id.mobileNumber_content);
         etPassword = findViewById(R.id.password_content);
         etConfirmPassword = findViewById(R.id.confirmPassword_content);
-        profile_image = findViewById(R.id.user_profile);
 
         findViewById(R.id.signUpBtn).setOnClickListener(v -> signUpUser());
 
@@ -114,16 +114,9 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-        File tempFile;
-        try {
-            tempFile = saveImageToCache();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("profile_image", tempFile.getAbsolutePath()).putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putBoolean("isLoggedIn", false).apply();
+        getSharedPreferences("BankAppPrefs", MODE_PRIVATE).edit().putString("userName", userName).putString("accountNumber", accountNumber).putString("mobileNumber", mobileNumber).putString("password", password).putBoolean("isLoggedIn", false).apply();
         Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(SignUp.this, LoginPage.class));
+        startActivity(new Intent(this, LoginPage.class));
         finish();
 
     }
@@ -134,25 +127,13 @@ public class SignUp extends AppCompatActivity {
         startActivityForResult(intent, 100);
 
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
-            profile_image.setImageURI(uri);
+            user_profile.setImageURI(uri);
         }
     }
 
-    private File saveImageToCache() throws IOException {
-        if (profile_image.getDrawable() == null) {
-            throw new IOException("No image selected");
-        }
-        Bitmap bitmap = ((BitmapDrawable) profile_image.getDrawable()).getBitmap();
-        File tempFile = new File(getCacheDir(), "profile_picture.jpg");
-        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        }
-        return tempFile;
-    }
 }

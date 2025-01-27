@@ -10,13 +10,15 @@ public class UserData implements Serializable {
     private ArrayList<String> transactions;
 
 
+
     public UserData(String name, String accountNumber, double balance) {
         this.name = name;
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.transactions = new ArrayList<>();
-
     }
+
+
 
 
     public String getName() {

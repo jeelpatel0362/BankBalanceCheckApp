@@ -3,6 +3,7 @@ package com.example.bankbalancecheckapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -25,12 +26,12 @@ public class AccountDetails extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_account_details);
 
-        userData = (UserData) getIntent().getSerializableExtra("user");
+        CircleImageView profileImageView = findViewById(R.id.user_profile);
 
+        userData = (UserData) getIntent().getSerializableExtra("user");
         TextView nameText = findViewById(R.id.nameText);
         TextView accountNumberText = findViewById(R.id.accountNumber);
         TextView balanceText = findViewById(R.id.balanceText);
-
 
 
         if (userData != null) {
@@ -39,12 +40,13 @@ public class AccountDetails extends AppCompatActivity {
             balanceText.setText("Account Balance: " + userData.getBalance());
         }
     }
+        public void logoutUser (View view){
+            Toast.makeText(this, "User logged out successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SplashScreen.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
 
-    public void logoutUser(View view) {
-        Toast.makeText(this, "User logged out successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, SplashScreen.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 }
+
