@@ -6,12 +6,9 @@ import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 public class TransactionHistory extends AppCompatActivity {
-    private UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +16,12 @@ public class TransactionHistory extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_transaction_history);
 
-        userData = (UserData) getIntent().getSerializableExtra("user");
+        UserData userData = (UserData) getIntent().getSerializableExtra("user");
 
         ListView transactionListView = findViewById(R.id.transactionHistory);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userData.getTransaction());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.listview_text_color, userData.getTransaction());
         transactionListView.setAdapter(adapter);
     }
 }
