@@ -66,8 +66,7 @@ public class TransferMoney extends AppCompatActivity {
         }
 
         userData.setBalance(userData.getBalance()-amount);
-        userData.addTransaction("₹" + amountText +  " sent to " + recipientText );
-
+        userData.addTransaction("Transaction successful: ₹" + amountText + " sent to " + recipientText);
         Toast.makeText(this,"Transaction successfull",Toast.LENGTH_SHORT).show();
 
 

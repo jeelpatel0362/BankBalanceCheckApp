@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override
@@ -27,6 +29,7 @@ public class SplashScreen extends AppCompatActivity {
             boolean isLoggedIn = pref.getBoolean("isLoggedIn", false);
 
 
+
             if (isRegistered) {
                 if (isLoggedIn) {
                     String name = pref.getString("userName", "user");
@@ -34,7 +37,11 @@ public class SplashScreen extends AppCompatActivity {
                     double balance = 100000.0;
                     String mobileNumber = pref.getString("mobileNumber", "");
 
+
                     UserData userData = new UserData(name, accountNumber, balance,mobileNumber);
+
+
+
 
                     Intent intent = new Intent(this, HomeScreen.class);
                     intent.putExtra("user",userData);
@@ -54,4 +61,5 @@ public class SplashScreen extends AppCompatActivity {
         }, 3000);
 
     }
+
 }
