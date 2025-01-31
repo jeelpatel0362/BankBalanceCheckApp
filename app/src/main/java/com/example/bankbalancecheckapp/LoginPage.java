@@ -63,7 +63,7 @@ public class LoginPage extends AppCompatActivity {
             prefs.edit().putBoolean("isLoggedIn", true).apply();
 
             String name = prefs.getString("userName", "user");
-            UserData userData = new UserData(name, storedAccountNumber, 10000.0,storedMobileNumber);
+            UserData userData = new UserData(name, storedAccountNumber, 100000.0,storedMobileNumber);
             Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, HomeScreen.class);
             intent.putExtra("user", userData);

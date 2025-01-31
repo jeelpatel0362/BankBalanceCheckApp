@@ -1,6 +1,7 @@
 package com.example.bankbalancecheckapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -43,8 +44,14 @@ public class AccountDetails extends AppCompatActivity {
         }
     }
         public void logoutUser (View view){
-            Toast.makeText(this, "User logged out successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, SplashScreen.class);
+            SharedPreferences pref = getSharedPreferences("BankAppPrefs", MODE_PRIVATE);
+
+            pref.edit().putBoolean("isLoggedIn",false).apply();
+
+            Toast.makeText(this,"User logout successfully", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this , LoginPage.class);
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
