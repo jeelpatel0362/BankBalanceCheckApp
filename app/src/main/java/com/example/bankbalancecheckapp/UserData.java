@@ -47,6 +47,9 @@ public class UserData implements Serializable {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 
     public void addTransaction(String transaction) {
         transactions.add(transaction);
